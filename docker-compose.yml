@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+    restart: always
+    ports:
+      - "8000:8000"
+    command: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&           
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./app:/app
+      - media_volume:/app/media
+      - static_volume:/app/static
+
+
+
+volumes:
+  my_dbdata:
+  media_volume:
+  static_volume:
