@@ -8,7 +8,7 @@ COPY ./requirements.txt /requirements.txt
 # # jpeg-dev, musl-dev, zlib & zlib-dev is required for Pillow (image upload)
 # RUN apk add --update  --no-cache --virtual .tmp-build-deps \
 #       libc-dev linux-headers postgresql-dev musl-dev zlib zlib-dev
-# RUN pip install -r /requirements.txt
+RUN pip install -r /requirements.txt
 # RUN apk del .tmp-build-deps
 
 EXPOSE 8000
