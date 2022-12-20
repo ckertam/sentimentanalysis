@@ -5,6 +5,8 @@ from rest_framework.response import Response
 # Create your views here.
 from textblob import TextBlob
 import os
+import pandas as pd
+
 class AnalyzeTweetsAPIView(APIView):
     def post(self,request,*args,**kwargs):
         data = request.data
