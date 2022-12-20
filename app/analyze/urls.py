@@ -4,5 +4,6 @@ from django.urls import path
 
 
 urlpatterns = [
+    path("simulation/", views.AnalyzeTweetsSimulationAPIView.as_view(), name="get tables and send email"),
     path("", views.AnalyzeTweetsAPIView.as_view(), name="get tables and send email"),
 ]
