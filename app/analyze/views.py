@@ -39,7 +39,7 @@ class AnalyzeTweetsSimpleSimulationAPIView(APIView):
         since_date = data.get("since_date")
         file_path = os.path.abspath("analyze/SimpleSimulation.xlsx")
         df = pd.read_excel(file_path)
-        sentences=df["tweet"].values.tolist()
+        sentences=df["tweet"].tolist()
         polarity=0.0
         subjectivity=0.0
         for sentence in sentences:
@@ -65,7 +65,7 @@ class AnalyzeTweetsComplexSimulationAPIView(APIView):
         since_date = data.get("since_date")
         file_path = os.path.abspath("analyze/ComplexSimulation.xlsx")
         df = pd.read_excel(file_path)
-        sentences=df["tweet"].values.tolist()
+        sentences=df["tweet"].tolist()
         polarity=0.0
         subjectivity=0.0
         for sentence in sentences:
