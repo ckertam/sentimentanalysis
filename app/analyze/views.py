@@ -32,12 +32,38 @@ class AnalyzeTweetsAPIView(APIView):
         response = f"{username} is {happiness_value} and {subjectivity_value} since {since_date}"
         return Response(response, status=200)
 
-class AnalyzeTweetsSimulationAPIView(APIView):
+class AnalyzeTweetsSimpleSimulationAPIView(APIView):
     def post(self,request,*args,**kwargs):
         data = request.data
         username = data.get("username")
         since_date = data.get("since_date")
-        file_path = os.path.abspath("analyze/TestExcel.xlsx")
+        file_path = os.path.abspath("analyze/SimpleSimulation.xlsx")
+        df = pd.read_excel(file_path)
+        sentences=df["tweet"].values.tolist()
+        polarity=0.0
+        subjectivity=0.0
+        for sentence in sentences:
+            res = TextBlob(sentence)
+            polarity += res.sentiment.polarity
+            subjectivity += res.sentiment.subjectivity
+        avg_polarity = polarity/float(len(sentences))
+        avg_subjectivity = subjectivity/float(len(sentences))
+        happiness_value = "unhappy"
+        subjectivity_value = "objective"
+        if avg_polarity > 0:
+            happiness_value = "happy"
+        if avg_subjectivity > 0:
+            subjectivity_value="subjective"
+        
+        response = f"{username} is {happiness_value} and {subjectivity_value} since {since_date}"
+        return Response(response, status=200)
+
+class AnalyzeTweetsComplexSimulationAPIView(APIView):
+    def post(self,request,*args,**kwargs):
+        data = request.data
+        username = data.get("username")
+        since_date = data.get("since_date")
+        file_path = os.path.abspath("analyze/ComplexSimulation.xlsx")
         df = pd.read_excel(file_path)
         sentences=df["tweet"].values.tolist()
         polarity=0.0
